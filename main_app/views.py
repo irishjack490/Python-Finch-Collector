@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Finch
+from .forms import FeedingForm
 from django.urls import reverse
 
 # finches = [
@@ -31,7 +32,14 @@ def finches_index(request):
 
 def finches_detail(request, finch_id):
     finch = Finch.objects.get(id=finch_id)
-    return render(request, 'finches/detail.html', {'finch': finch})
+# return render(request, 'finches/detail.html', {'finch': finch})
+#instantiate feeding form to be rendered in the template
+    #feeding form is set to an instance of FeedingForm and then passed to detail.html
+    #in the context along with finch 
+    feeding_form = FeedingForm()
+    return render (request, 'finches/detail.html', {
+       'finch': finch, 'feeding_form': feeding_form
+    })
 
 class FinchCreate(CreateView):
   model = Finch

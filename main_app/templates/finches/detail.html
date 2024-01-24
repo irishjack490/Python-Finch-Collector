@@ -14,6 +14,28 @@
         <a href="{% url 'finches_update' finch.id %}">Edit</a>
         <a href="{% url 'finches_delete' finch.id %}">Delete</a>
       </div>
+        <div class="col s6">
+          <form method="POST">
+            {% csrf_token %}
+            <!-- feeding_form.as_p will generate the <input> tags wrapped in <p> for each field
+              we specified in the feeding form -->
+            {{ feeding_form.as_p }}
+            <input type="submit" class="btn" value="Add Feeding">
+          </form>
+          <table class="striped">
+            <thead>
+              <tr><th>Date</th><th>Meal</th></tr>
+            </thead>
+            <tbody>
+              {% for feeding in finch.feeding_set.all %}
+                <tr>
+                  <td>{{feeding.date}}</td>
+                  <td>{{feeding.get_meal_display}}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
   </div>
 
 
