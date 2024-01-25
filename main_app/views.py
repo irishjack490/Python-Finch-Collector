@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Finch
+from django.views.generic import ListView, DetailView
+from .models import Finch, Watercup
 from .forms import FeedingForm
 from django.urls import reverse
 
@@ -68,3 +69,7 @@ class FinchUpdate(UpdateView):
 class FinchDelete(DeleteView):
   model = Finch
   success_url = '/finches'
+
+
+class WatercupDetail(DetailView):
+   model = Watercup
