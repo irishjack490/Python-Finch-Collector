@@ -7,12 +7,17 @@ MEALS = (
     ('D', 'Dinner')
 )
 
+class Watercup(models.Model):
+     color = models.CharField(max_length=50)
+     size = models.CharField(max_length=20)
+
 # Create your models here.
 class Finch(models.Model):
     breed = models.CharField(max_length=100)
     scientific_name = models.CharField(max_length=100)
     personality = models.TextField(max_length=150)
     age_span = models.IntegerField()
+    watercups = models.ManyToManyField(Watercup)
     
     
 def __str__(self):
